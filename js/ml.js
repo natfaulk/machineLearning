@@ -42,8 +42,6 @@ function tick() {
     ballTrail.graphics.beginFill("green").drawCircle(ball.x, ball.y, 2);
 
     elapsedTimeText.text = ((createjs.Ticker.getTime() - timeBegan) / 1000).toFixed(2) + " s";
-    successfulHitsText.text = "Succesful attempts : " + succesfulHits + " (" + (succesfulHits/attempts * 100).toFixed(0) + "%)";
-    attemptsText.text = "Attempts : " + attempts;
 
     if (createjs.Ticker.getTime() - timeBegan > 10 * 1000){
       reset();
@@ -62,7 +60,12 @@ function tick() {
     aimLine.graphics.moveTo(stage.mouseX, stage.mouseY);
     aimLine.graphics.lineTo(40,400);
     aimLine.graphics.endStroke();
+
+    elapsedTimeText.text = "0 s";
   }
+
+  successfulHitsText.text = "Succesful attempts : " + succesfulHits + " (" + (succesfulHits/attempts * 100).toFixed(0) + "%)";
+  attemptsText.text = "Attempts : " + attempts;
 
   stage.update();
 }
@@ -149,6 +152,8 @@ function reset(){
     ballFired = true;
     ballVx = (stage.mouseX - 40) / AIM_SCALER;
     ballVy = (stage.mouseY - 400) / AIM_SCALER;
+    stage.removeChild(aimText);
+    stage.removeChild(aimLine);
     stage.removeAllEventListeners("stagemouseup");
   })
 }
