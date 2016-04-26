@@ -74,16 +74,20 @@ function collisionDetect(){
   // floor
   if (ball.y + (ball.height)  > 440 ){
     ballVy = -Math.abs(ballVy * RESTITUTION);
+    ball.y = 440 - (ball.height + 1);
   }
 
   // left wall
   if (ball.x - ball.height < 0 ){
     ballVx = Math.abs(ballVy * RESTITUTION);
+    ball.x = ball.height + 1;
   }
   // right wall
 
   if (ball.x + ball.height > 800 ){
     ballVx = -Math.abs(ballVy * RESTITUTION);
+    ball.x = 800 - (ball.height + 1);
+
   }
 
   if (ball.x > target.x && ball.x < target.x + 40 && ball.y > target.y && ball.y < target.y + 40){
