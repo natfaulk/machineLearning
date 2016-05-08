@@ -1,3 +1,5 @@
+var HUMAN_CONTROLLED = false;
+
 var stage;
 var ballTrail;
 var ball;
@@ -151,13 +153,20 @@ function reset(){
 
   stage.update();
 
-  stage.addEventListener("stagemouseup", function(event) {
+  if (HUMAN_CONTROLLED){
+    stage.addEventListener("stagemouseup", function(event) {
+      timeBegan = createjs.Ticker.getTime();
+      ballFired = true;
+      ballVx = (stage.mouseX - 40) / AIM_SCALER;
+      ballVy = (stage.mouseY - 400) / AIM_SCALER;
+      stage.removeChild(aimText);
+      stage.removeChild(aimLine);
+      stage.removeAllEventListeners("stagemouseup");
+    });
+  }else{
     timeBegan = createjs.Ticker.getTime();
     ballFired = true;
-    ballVx = (stage.mouseX - 40) / AIM_SCALER;
-    ballVy = (stage.mouseY - 400) / AIM_SCALER;
-    stage.removeChild(aimText);
-    stage.removeChild(aimLine);
-    stage.removeAllEventListeners("stagemouseup");
-  })
+    ballVx = Math.round(Math.random() * 760);
+    ballVy = Math.round(Math.random() * 760);;
+  }
 }
