@@ -9,7 +9,7 @@
 
 const int SCREEN_WIDTH  = 400;
 const int SCREEN_HEIGHT = 600;
-const double GRAVITY = 2;
+const double GRAVITY = 0.5;
 
 class GameEngine{
 public:
@@ -19,12 +19,9 @@ public:
   void update(void);
 
   Character myChar;
-  Platform ground;
-
-
 
 private:
-  std::vector<std::unique_ptr<DrawableObject>> mDrawableObjects;
+  std::vector<Platform> mPlatforms;
   SDL_Window *mSdlWindow;
   SDL_Renderer* mSdlRenderer;
 };

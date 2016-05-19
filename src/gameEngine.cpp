@@ -22,8 +22,9 @@ void GameEngine::setup(void){
 		exit (EXIT_FAILURE);;
 	}
 
-  ground.setPos(SCREEN_WIDTH/2,SCREEN_HEIGHT-20);
-  ground.setWidth(SCREEN_WIDTH);
+  mPlatforms.push_back(Platform(SCREEN_WIDTH/2, SCREEN_HEIGHT-20, SCREEN_WIDTH));
+  mPlatforms.push_back(Platform(200, 300, 50));
+  mPlatforms.push_back(Platform(400, 500, 50));
 }
 
 void GameEngine::cleanup(void){
@@ -37,7 +38,9 @@ void GameEngine::render(void){
   SDL_RenderClear( mSdlRenderer );
 
   myChar.draw(mSdlRenderer);
-  ground.draw(mSdlRenderer);
+  for(int i = 0; i<mPlatforms.size(); i++){
+    mPlatforms.at(i).draw(mSdlRenderer);
+  }
 
   // for (int i = 0; i<mDrawableObjects; i++){
   //   mDrawableObjects.at(i).draw();
@@ -53,15 +56,17 @@ void GameEngine::update(void){
   double tempCharY = myChar.getYpos();
   myChar.move();
 
-  
-  int tempDiffX = myChar.getXpos() - tempCharX;
-  int tempDiffY = myChar.getYpos() - tempCharY;
-  if (tempDiffY!=0){
-    for(int i = 0; i<=tempDiffY;i++){
-      if(ground.checkCollision(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i)){
-        myChar.setVelocity(myChar.getXvelocity(),-CHAR_JUMP_VELOCITY);
-        myChar.setPos(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i);
-        break;
+  for(int j = 0; j<mPlatforms.size(); j++){
+
+    int tempDiffX = myChar.getXpos() - tempCharX;
+    int tempDiffY = myChar.getYpos() - tempCharY;
+    if (tempDiffY!=0){
+      for(int i = 0; i<=tempDiffY;i++){
+        if(mPlatforms.at(j).checkCollision(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i)){
+          myChar.setVelocity(myChar.getXvelocity(),-CHAR_JUMP_VELOCITY);
+          myChar.setPos(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i);
+          break;
+        }
       }
     }
   }
