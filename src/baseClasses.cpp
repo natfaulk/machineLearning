@@ -5,6 +5,8 @@ DrawableObject::DrawableObject(){
   mYpos=0;
   mXvel=0;
   mYvel=0;
+  mGravityAffected = false;
+  mMoveable = false;
 }
 
 

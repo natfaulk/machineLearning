@@ -20,6 +20,8 @@ protected:
   double mYpos;
   double mXvel;
   double mYvel;
+  bool mGravityAffected;
+  bool mMoveable;
 };
 
 #endif
