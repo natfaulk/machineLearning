@@ -49,7 +49,18 @@ void GameEngine::render(void){
 
 void GameEngine::update(void){
   myChar.setVelocity(myChar.getXvelocity(),myChar.getYvelocity() + GRAVITY);
+  double tempCharX = myChar.getXpos();
+  double tempCharY = myChar.getYpos();
   myChar.move();
+  int tempDiffX = myChar.getXpos() - tempCharX;
+  int tempDiffY = myChar.getYpos() - tempCharY;
+  for(int i = 0; i<=tempDiffY;i++){
+    if(ground.checkCollision(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i)){
+      myChar.setVelocity(myChar.getXvelocity(),-10);
+      myChar.setPos(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i);
+      break;
+    }
+  }
   if (myChar.getYpos() > SCREEN_HEIGHT){
     myChar.setPos(myChar.getXpos(), 0);
   }

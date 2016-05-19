@@ -2,7 +2,7 @@
 
 Platform::Platform(){
   mWidth = 0;
-  mHeight = 10;
+  mHeight = 1;
 }
 
 void Platform::draw(SDL_Renderer *ren){
@@ -13,4 +13,14 @@ void Platform::draw(SDL_Renderer *ren){
 
 void Platform::setWidth(int width){
   mWidth = width;
+}
+
+bool Platform::checkCollision(double x, double y){
+  x -= mXpos;
+  y -= mYpos;
+  if(x<=mWidth / 2 && x>=-mWidth/2 && y>=0 && y<mHeight){
+    return true;
+  }else{
+    return false;
+  }
 }
