@@ -20,3 +20,7 @@ obj/%.o: src/%.cpp
 
 clean:
 	rm obj/*.o && rm $(BIN_FOLDER)/$(EXE)
+
+rebuild:
+	make clean
+	make
