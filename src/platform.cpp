@@ -2,7 +2,14 @@
 
 Platform::Platform(){
   mWidth = 0;
-  mHeight = 1;
+  mHeight = PLATFORM_HEIGHT;
+}
+
+Platform::Platform(double xpos, double ypos, int width){
+  mXpos = xpos;
+  mYpos = ypos;
+  mWidth = width;
+  mHeight = PLATFORM_HEIGHT;
 }
 
 void Platform::draw(SDL_Renderer *ren){
