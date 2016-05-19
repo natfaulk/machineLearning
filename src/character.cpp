@@ -1,8 +1,8 @@
 #include "character.hpp"
 
 Character::Character(){
-  mWidth = 10;
-  mHeight = 20;
+  mWidth = CHAR_WIDTH;
+  mHeight = CHAR_HEIGHT;
   mGravityAffected = true;
   mMoveable = true;
 }
