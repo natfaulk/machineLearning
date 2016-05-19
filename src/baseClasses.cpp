@@ -40,3 +40,10 @@ void DrawableObject::move(void){
   mXpos += mXvel;
   mYpos += mYvel;
 }
+
+void DrawableObject::setXpos(double xpos){
+  mXpos = xpos;
+}
+void DrawableObject::setYpos(double ypos){
+  mYpos = ypos;
+}

@@ -14,6 +14,8 @@ public:
   double getYvelocity(void);
   double getXpos(void);
   double getYpos(void);
+  void setXpos(double xpos);
+  void setYpos(double ypos);
 
 protected:
   double mXpos;
