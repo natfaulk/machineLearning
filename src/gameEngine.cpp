@@ -52,16 +52,29 @@ void GameEngine::update(void){
   double tempCharX = myChar.getXpos();
   double tempCharY = myChar.getYpos();
   myChar.move();
+
+  
   int tempDiffX = myChar.getXpos() - tempCharX;
   int tempDiffY = myChar.getYpos() - tempCharY;
-  for(int i = 0; i<=tempDiffY;i++){
-    if(ground.checkCollision(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i)){
-      myChar.setVelocity(myChar.getXvelocity(),-10);
-      myChar.setPos(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i);
-      break;
+  if (tempDiffY!=0){
+    for(int i = 0; i<=tempDiffY;i++){
+      if(ground.checkCollision(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i)){
+        myChar.setVelocity(myChar.getXvelocity(),-CHAR_JUMP_VELOCITY);
+        myChar.setPos(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i);
+        break;
+      }
     }
   }
+
+  if(myChar.getXpos()<0){
+    myChar.setXpos(SCREEN_WIDTH);
+  }
+  if(myChar.getXpos()>SCREEN_WIDTH){
+    myChar.setXpos(0);
+  }
+
   if (myChar.getYpos() > SCREEN_HEIGHT){
+    // game over
     myChar.setPos(myChar.getXpos(), 0);
   }
 }
