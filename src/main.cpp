@@ -10,10 +10,7 @@ int main(int, char**){
 	bool quit = false;
 	SDL_Event e;
 
-
-
 	game.myChar.setPos(100,100);
-	game.myChar.setVelocity(0,1);
 
 	while(!quit){
 		//Handle events on queue
@@ -26,8 +23,7 @@ int main(int, char**){
 				 }
 		 }
 
-		 game.myChar.move();
-
+		 game.update();
 		 game.render();
 	}
 

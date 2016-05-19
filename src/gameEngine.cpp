@@ -21,6 +21,9 @@ void GameEngine::setup(void){
 		SDL_Quit();
 		exit (EXIT_FAILURE);;
 	}
+
+  ground.setPos(SCREEN_WIDTH/2,SCREEN_HEIGHT-20);
+  ground.setWidth(SCREEN_WIDTH);
 }
 
 void GameEngine::cleanup(void){
@@ -34,6 +37,7 @@ void GameEngine::render(void){
   SDL_RenderClear( mSdlRenderer );
 
   myChar.draw(mSdlRenderer);
+  ground.draw(mSdlRenderer);
 
   // for (int i = 0; i<mDrawableObjects; i++){
   //   mDrawableObjects.at(i).draw();
@@ -43,6 +47,10 @@ void GameEngine::render(void){
   SDL_RenderPresent( mSdlRenderer );
 }
 
-// void GameEngine::addDrawableObject(DrawableObject& da){
-//   //mDrawableObjects.push_back(da);
-// }
+void GameEngine::update(void){
+  myChar.setVelocity(myChar.getXvelocity(),myChar.getYvelocity() + GRAVITY);
+  myChar.move();
+  if (myChar.getYpos() > SCREEN_HEIGHT){
+    myChar.setPos(myChar.getXpos(), 0);
+  }
+}
