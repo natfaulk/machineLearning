@@ -1,6 +1,12 @@
 An attempt at some basic machine learning. Inspired by the Google Go AI that recently beat a human.
 
-"Learns" to throw a ball
+Doodle jump style jumping game
 
-Using the below HTML5 library to draw on the HTML5 canvas:
-http://www.createjs.com/easeljs
+Switched from HTML/JS to c++ early on
+
+Using SDL2 for rendering
+
+Font taken from https://github.com/google/fonts/tree/master/apache/roboto
+(probs needs the license sorting out)
+
+potentially need this for sdl_ttf http://www.cs.nyu.edu/courses/fall09/V22.0201-002/SDL_ttf_instructions.html
