@@ -7,7 +7,7 @@
 class Character: public DrawableObject{
 public:
   Character();
-  void draw(SDL_Renderer *ren);
+  void draw(SDL_Renderer *ren, int heightJumped);
 private:
   int mWidth;
   int mHeight;

@@ -22,9 +22,11 @@ void GameEngine::setup(void){
 		exit (EXIT_FAILURE);;
 	}
 
-  mPlatforms.push_back(Platform(SCREEN_WIDTH/2, SCREEN_HEIGHT-20, SCREEN_WIDTH));
-  mPlatforms.push_back(Platform(200, 300, 50));
-  mPlatforms.push_back(Platform(400, 500, 50));
+  mHeightJumped = 0;
+
+  mPlatforms.push_back(Platform(SCREEN_WIDTH/2, -100, SCREEN_WIDTH));
+  mPlatforms.push_back(Platform(200, 200, 300));
+  mPlatforms.push_back(Platform(400, 300, 50));
 }
 
 void GameEngine::cleanup(void){
@@ -37,9 +39,9 @@ void GameEngine::render(void){
   SDL_SetRenderDrawColor( mSdlRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
   SDL_RenderClear( mSdlRenderer );
 
-  myChar.draw(mSdlRenderer);
+  myChar.draw(mSdlRenderer, mHeightJumped);
   for(int i = 0; i<mPlatforms.size(); i++){
-    mPlatforms.at(i).draw(mSdlRenderer);
+    mPlatforms.at(i).draw(mSdlRenderer, mHeightJumped);
   }
 
   // for (int i = 0; i<mDrawableObjects; i++){
@@ -51,7 +53,7 @@ void GameEngine::render(void){
 }
 
 void GameEngine::update(void){
-  myChar.setVelocity(myChar.getXvelocity(),myChar.getYvelocity() + GRAVITY);
+  myChar.setVelocity(myChar.getXvelocity(),myChar.getYvelocity() - GRAVITY);
   double tempCharX = myChar.getXpos();
   double tempCharY = myChar.getYpos();
   myChar.move();
@@ -59,11 +61,11 @@ void GameEngine::update(void){
   for(int j = 0; j<mPlatforms.size(); j++){
 
     int tempDiffX = myChar.getXpos() - tempCharX;
-    int tempDiffY = myChar.getYpos() - tempCharY;
+    int tempDiffY = tempCharY - myChar.getYpos();
     if (tempDiffY!=0){
       for(int i = 0; i<=tempDiffY;i++){
         if(mPlatforms.at(j).checkCollision(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i)){
-          myChar.setVelocity(myChar.getXvelocity(),-CHAR_JUMP_VELOCITY);
+          myChar.setVelocity(myChar.getXvelocity(), CHAR_JUMP_VELOCITY);
           myChar.setPos(tempCharX + i*tempDiffX/tempDiffY, tempCharY + i);
           break;
         }
@@ -78,8 +80,12 @@ void GameEngine::update(void){
     myChar.setXpos(0);
   }
 
-  if (myChar.getYpos() > SCREEN_HEIGHT){
-    // game over
-    myChar.setPos(myChar.getXpos(), 0);
+  if(myChar.getYpos() > mHeightJumped){
+    mHeightJumped = myChar.getYpos();
+  }
+
+  if (myChar.getTransformedYpos(mHeightJumped) > SCREEN_HEIGHT){
+    std::cout << "GAME_OVER" << std::endl;
+    myChar.setPos(myChar.getXpos(), 100);
   }
 }

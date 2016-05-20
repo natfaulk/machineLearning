@@ -8,7 +8,7 @@ class Platform: public DrawableObject{
 public:
   Platform();
   Platform(double xpos, double ypos, int width);
-  void draw(SDL_Renderer *ren);
+  void draw(SDL_Renderer *ren, int heightJumped);
   void setWidth(int width);
   bool checkCollision(double x, double y);
 private:

@@ -9,6 +9,8 @@ const int CHAR_HEIGHT = 30;
 const int CHAR_WIDTH = 18;
 const double CHAR_JUMP_VELOCITY = 20;
 
-const int PLATFORM_HEIGHT = 5;
+const int PLATFORM_HEIGHT = 1;
+
+const int JUMPING_THRESHOLD_HEIGHT = SCREEN_HEIGHT/3;
 
 #endif

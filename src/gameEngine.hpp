@@ -21,6 +21,7 @@ private:
   std::vector<Platform> mPlatforms;
   SDL_Window *mSdlWindow;
   SDL_Renderer* mSdlRenderer;
+  int mHeightJumped;
 };
 
 #endif

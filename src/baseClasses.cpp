@@ -47,3 +47,7 @@ void DrawableObject::setXpos(double xpos){
 void DrawableObject::setYpos(double ypos){
   mYpos = ypos;
 }
+
+double DrawableObject::getTransformedYpos(int heightJumped){
+  return (heightJumped - mYpos) + JUMPING_THRESHOLD_HEIGHT;
+}
