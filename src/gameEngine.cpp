@@ -1,11 +1,17 @@
 #include "gameEngine.hpp"
 #include <iostream>
 
-void GameEngine::setup(void){
+GameEngine::GameEngine(){
   if (SDL_Init(SDL_INIT_VIDEO) != 0){
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-		exit (EXIT_FAILURE);;
+		exit (EXIT_FAILURE);
 	}
+
+  //Initialize SDL_ttf
+  if( TTF_Init() == -1 ){
+    std::cout << "TTF_Init Error: " << TTF_GetError() << std::endl;
+    exit (EXIT_FAILURE);
+  }
 
 	mSdlWindow = SDL_CreateWindow("Hello World!", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (mSdlWindow == nullptr){
@@ -19,10 +25,11 @@ void GameEngine::setup(void){
 		SDL_DestroyWindow(mSdlWindow);
 		std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
-		exit (EXIT_FAILURE);;
+		exit (EXIT_FAILURE);
 	}
 
   mHeightJumped = 0;
+  mScoreText = std::unique_ptr<ScoreText>(new ScoreText);
 
   mPlatforms.push_back(Platform(SCREEN_WIDTH/2, -100, SCREEN_WIDTH));
   int tempyval = -100;
@@ -35,6 +42,7 @@ void GameEngine::setup(void){
 void GameEngine::cleanup(void){
   SDL_DestroyRenderer(mSdlRenderer);
 	SDL_DestroyWindow(mSdlWindow);
+  TTF_Quit();
 	SDL_Quit();
 }
 
@@ -47,6 +55,7 @@ void GameEngine::render(void){
   }
 
   myChar.draw(mSdlRenderer, mHeightJumped);
+  mScoreText->draw(mSdlRenderer, mHeightJumped);
 
   //Update screen
   SDL_RenderPresent( mSdlRenderer );

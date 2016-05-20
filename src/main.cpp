@@ -5,8 +5,6 @@
 GameEngine game;
 
 int main(int, char**){
-	game.setup();
-
 	bool quit = false;
 	SDL_Event e;
 

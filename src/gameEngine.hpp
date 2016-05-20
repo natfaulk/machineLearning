@@ -6,17 +6,19 @@
 #include "character.hpp"
 #include "platform.hpp"
 #include "Constants.hpp"
+#include "scoreText.hpp"
 #include <vector>
 
 class GameEngine{
 public:
-  void setup(void);
+  GameEngine();
   void cleanup(void);
   void render(void);
   void update(void);
   void managePlatforms(void);
 
   Character myChar;
+  std::unique_ptr<ScoreText> mScoreText;
 
 private:
   std::vector<Platform> mPlatforms;
