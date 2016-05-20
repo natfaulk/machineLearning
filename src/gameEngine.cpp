@@ -42,14 +42,11 @@ void GameEngine::render(void){
   SDL_SetRenderDrawColor( mSdlRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
   SDL_RenderClear( mSdlRenderer );
 
-  myChar.draw(mSdlRenderer, mHeightJumped);
   for(int i = 0; i<mPlatforms.size(); i++){
     mPlatforms.at(i).draw(mSdlRenderer, mHeightJumped);
   }
 
-  // for (int i = 0; i<mDrawableObjects; i++){
-  //   mDrawableObjects.at(i).draw();
-  // }
+  myChar.draw(mSdlRenderer, mHeightJumped);
 
   //Update screen
   SDL_RenderPresent( mSdlRenderer );
