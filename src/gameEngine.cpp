@@ -25,8 +25,11 @@ void GameEngine::setup(void){
   mHeightJumped = 0;
 
   mPlatforms.push_back(Platform(SCREEN_WIDTH/2, -100, SCREEN_WIDTH));
-  mPlatforms.push_back(Platform(200, 200, 300));
-  mPlatforms.push_back(Platform(400, 300, 50));
+  int tempyval = -100;
+  while(tempyval<JUMPING_THRESHOLD_HEIGHT){
+    tempyval += rand()%(MAX_PLATFORM_Y_SPACING - MIN_PLATFORM_Y_SPACING) + MIN_PLATFORM_Y_SPACING;
+    mPlatforms.push_back(Platform(rand()%SCREEN_WIDTH, tempyval, PLATFORM_WIDTH));
+  }
 }
 
 void GameEngine::cleanup(void){
@@ -87,5 +90,18 @@ void GameEngine::update(void){
   if (myChar.getTransformedYpos(mHeightJumped) > SCREEN_HEIGHT){
     std::cout << "GAME_OVER" << std::endl;
     myChar.setPos(myChar.getXpos(), 100);
+  }
+}
+
+void GameEngine::managePlatforms(void){
+  std::cout << "Number of platforms: " << mPlatforms.size() << std::endl;
+  // back undefined if vector empty. Shouldn't ever be empty but just incase...
+  if(mPlatforms.size() == 0 || mPlatforms.back().getTransformedYpos(mHeightJumped)>=0){
+    int newXpos = rand()%SCREEN_WIDTH;
+    int newYpos = mHeightJumped + JUMPING_THRESHOLD_HEIGHT + rand()%(MAX_PLATFORM_Y_SPACING - MIN_PLATFORM_Y_SPACING) + MIN_PLATFORM_Y_SPACING;
+    mPlatforms.push_back(Platform(newXpos, newYpos, PLATFORM_WIDTH));
+  }
+  if(mPlatforms.size() > 0 && mPlatforms.front().getTransformedYpos(mHeightJumped)>SCREEN_HEIGHT){
+    mPlatforms.erase(mPlatforms.begin());
   }
 }

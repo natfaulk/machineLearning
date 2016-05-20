@@ -14,6 +14,7 @@ public:
   void cleanup(void);
   void render(void);
   void update(void);
+  void managePlatforms(void);
 
   Character myChar;
 

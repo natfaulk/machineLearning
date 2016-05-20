@@ -45,6 +45,7 @@ int main(int, char**){
 		}
 
 		game.update();
+		game.managePlatforms();
 		game.render();
 	}
 
