@@ -5,11 +5,8 @@
 #include "baseClasses.hpp"
 #include "character.hpp"
 #include "platform.hpp"
+#include "Constants.hpp"
 #include <vector>
-
-const int SCREEN_WIDTH  = 400;
-const int SCREEN_HEIGHT = 600;
-const double GRAVITY = 0.5;
 
 class GameEngine{
 public:

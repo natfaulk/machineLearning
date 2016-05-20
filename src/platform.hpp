@@ -2,8 +2,7 @@
 #define PLATFORM_HPP
 
 #include "baseClasses.hpp"
-
-const int PLATFORM_HEIGHT = 1;
+#include "Constants.hpp"
 
 class Platform: public DrawableObject{
 public:
