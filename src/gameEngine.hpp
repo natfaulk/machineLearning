@@ -12,13 +12,13 @@
 class GameEngine{
 public:
   GameEngine();
-  void cleanup(void);
+  void cleanup(void); // move to a destructor function?
   void render(void);
   void update(void);
   void managePlatforms(void);
 
   Character myChar;
-  std::unique_ptr<ScoreText> mScoreText;
+  ScoreText* mScoreText;
 
 private:
   std::vector<Platform> mPlatforms;

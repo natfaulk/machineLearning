@@ -7,6 +7,9 @@
 class DrawableObject{
 public:
   DrawableObject();
+  // derived classes get warning when you delete a dynamic version if base class
+  // has no destructor and derived class does
+  virtual ~DrawableObject(){};
   virtual void draw(SDL_Renderer *ren, int heightJumped) = 0;
   void setPos(double xpos, double ypos);
   void move(void);

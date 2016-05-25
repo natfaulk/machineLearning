@@ -29,7 +29,7 @@ GameEngine::GameEngine(){
 	}
 
   mHeightJumped = 0;
-  mScoreText = std::unique_ptr<ScoreText>(new ScoreText);
+  mScoreText = new ScoreText;
 
   mPlatforms.push_back(Platform(SCREEN_WIDTH/2, -100, SCREEN_WIDTH));
   int tempyval = -100;
@@ -40,6 +40,7 @@ GameEngine::GameEngine(){
 }
 
 void GameEngine::cleanup(void){
+  delete mScoreText;
   SDL_DestroyRenderer(mSdlRenderer);
 	SDL_DestroyWindow(mSdlWindow);
   TTF_Quit();
