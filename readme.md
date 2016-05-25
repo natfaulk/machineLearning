@@ -1,3 +1,5 @@
+# About
+
 An attempt at some basic machine learning. Inspired by the Google Go AI that recently beat a human.
 
 Doodle jump style jumping game
@@ -12,3 +14,6 @@ Download Roboto-Regular.ttf and put in the res folder
 Potentially need this for sdl_ttf setup on osx http://www.cs.nyu.edu/courses/fall09/V22.0201-002/SDL_ttf_instructions.html
 
 Currently only tested on OSX
+
+# Progress
+Basic game completed, no machine learning / neural network implemented yet
