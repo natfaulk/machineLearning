@@ -52,6 +52,12 @@ int main(int, char**){
 		debugPane.draw(game.getRenderer());
 
 		SDL_RenderPresent( game.getRenderer() );
+
+		if(game.gameOver()){
+			quit = true;
+
+			std::cout << "Final score: "<< game.getHeightJumped() << std::endl;
+		}
 	}
 
 

@@ -95,15 +95,10 @@ void GameEngine::update(void){
   if(myChar.getYpos() > mHeightJumped){
     mHeightJumped = myChar.getYpos();
   }
-
-  if (myChar.getTransformedYpos(mHeightJumped) > GAME_HEIGHT){
-    std::cout << "GAME_OVER" << std::endl;
-    myChar.setPos(myChar.getXpos(), 100);
-  }
 }
 
 void GameEngine::managePlatforms(void){
-  std::cout << "Number of platforms: " << mPlatforms.size() << std::endl;
+  //std::cout << "Number of platforms: " << mPlatforms.size() << std::endl;
   // back undefined if vector empty. Shouldn't ever be empty but just incase...
   if(mPlatforms.size() == 0 || mPlatforms.back().getTransformedYpos(mHeightJumped)>=0){
     int newXpos = rand()%GAME_WIDTH;
@@ -117,4 +112,12 @@ void GameEngine::managePlatforms(void){
 
 SDL_Renderer* GameEngine::getRenderer(){
   return mSdlRenderer;
+}
+
+bool GameEngine::gameOver(void){
+  return (myChar.getTransformedYpos(mHeightJumped) > GAME_HEIGHT);
+}
+
+int GameEngine::getHeightJumped(void){
+  return mHeightJumped;
 }

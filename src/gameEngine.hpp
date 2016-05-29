@@ -16,6 +16,8 @@ public:
   void render(void);
   void update(void);
   void managePlatforms(void);
+  bool gameOver(void);
+  int getHeightJumped(void);
 
   // The window stuff should be moved out of game engine into another class
   // then this function can be removed. Currently here so debug can access the renderer
