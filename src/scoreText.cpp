@@ -2,9 +2,7 @@
 #include <iostream>
 
 ScoreText::ScoreText(){
-  mWidth = 200;
-  mHeight = 50;
-  mXpos = GAME_WIDTH - mWidth;
+  mXpos = 0;
   mYpos = 0;
 
   mRobotoTTF = TTF_OpenFont("res/Roboto-Regular.ttf", 24);
@@ -12,21 +10,29 @@ ScoreText::ScoreText(){
     std::cout << "Couldn't load font: " << TTF_GetError() << std::endl;
 		exit (EXIT_FAILURE);
   }
-  mMessageRect.x = 0;  //controls the rect's x coordinate
-  mMessageRect.y = 0; // controls the rect's y coordinte
-  mMessageRect.w = mWidth; // controls the width of the rect
-  mMessageRect.h = mHeight; // controls the height of the rect
+  mMessageRect.x = mXpos;  //controls the rect's x coordinate
+  mMessageRect.y = mYpos; // controls the rect's y coordinte
+  mMessageRect.w = 0; // controls the width of the rect
+  mMessageRect.h = 0; // controls the height of the rect
 }
 
 ScoreText::~ScoreText(){
   // might need to destroy mMessage somehow
-  SDL_FreeSurface( mSurfaceMessage );
+  SDL_FreeSurface( mMessageSurface );
+  SDL_DestroyTexture(mMessageTexture);
   TTF_CloseFont( mRobotoTTF );
 }
 
 
 void ScoreText::draw(SDL_Renderer *ren, int heightJumped){
-  mSurfaceMessage = TTF_RenderText_Solid(mRobotoTTF, "put your text here", {0,0,0});
-  mMessage = SDL_CreateTextureFromSurface(ren, mSurfaceMessage);
-  SDL_RenderCopy(ren, mMessage, NULL, &mMessageRect);
+  mMessageRect.x = mXpos;
+  mMessageRect.y = mYpos;
+  // fast but no antialiasing
+  mMessageSurface = TTF_RenderText_Solid(mRobotoTTF, std::to_string(heightJumped).c_str(),{0,0,0});
+  // Slow but anti-aliased
+  // mMessageSurface = TTF_RenderText_Blended(mRobotoTTF, std::to_string(heightJumped).c_str(),{0,0,0});
+  mMessageTexture= SDL_CreateTextureFromSurface(ren, mMessageSurface);
+  // get the text width and height
+  SDL_QueryTexture(mMessageTexture, NULL, NULL, &mMessageRect.w, &mMessageRect.h);
+  SDL_RenderCopy(ren, mMessageTexture, NULL, &mMessageRect);
 }

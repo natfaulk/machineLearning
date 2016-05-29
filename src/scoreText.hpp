@@ -18,11 +18,9 @@ public:
   ~ScoreText();
   void draw(SDL_Renderer *ren, int heightJumped);
 private:
-  int mWidth;
-  int mHeight;
   TTF_Font* mRobotoTTF;
-  SDL_Surface* mSurfaceMessage;
-  SDL_Texture* mMessage;
+  SDL_Surface* mMessageSurface;
+  SDL_Texture* mMessageTexture;
   SDL_Rect mMessageRect;
 };
 
