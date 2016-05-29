@@ -59,7 +59,9 @@ void GameEngine::render(void){
   mScoreText->draw(mSdlRenderer, mHeightJumped);
 
   //Update screen
-  SDL_RenderPresent( mSdlRenderer );
+  // Moved below into game loop so that debug pane is drawn
+  // need to move all screen stuff to own class to clean evrything up
+  // SDL_RenderPresent( mSdlRenderer );
 }
 
 void GameEngine::update(void){
@@ -111,4 +113,8 @@ void GameEngine::managePlatforms(void){
   if(mPlatforms.size() > 0 && mPlatforms.front().getTransformedYpos(mHeightJumped)>GAME_HEIGHT){
     mPlatforms.erase(mPlatforms.begin());
   }
+}
+
+SDL_Renderer* GameEngine::getRenderer(){
+  return mSdlRenderer;
 }

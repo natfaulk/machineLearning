@@ -1,8 +1,10 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "gameEngine.hpp"
+#include "debugPane.hpp"
 
 GameEngine game;
+DebugPane debugPane;
 
 int main(int, char**){
 	bool quit = false;
@@ -45,6 +47,11 @@ int main(int, char**){
 		game.update();
 		game.managePlatforms();
 		game.render();
+
+		// see comment by getRenderer() definition
+		debugPane.draw(game.getRenderer());
+
+		SDL_RenderPresent( game.getRenderer() );
 	}
 
 

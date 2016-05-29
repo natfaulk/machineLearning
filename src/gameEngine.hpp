@@ -17,6 +17,10 @@ public:
   void update(void);
   void managePlatforms(void);
 
+  // The window stuff should be moved out of game engine into another class
+  // then this function can be removed. Currently here so debug can access the renderer
+  SDL_Renderer* getRenderer();
+
   Character myChar;
   ScoreText* mScoreText;
 
