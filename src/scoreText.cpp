@@ -4,7 +4,7 @@
 ScoreText::ScoreText(){
   mWidth = 200;
   mHeight = 50;
-  mXpos = SCREEN_WIDTH - mWidth;
+  mXpos = GAME_WIDTH - mWidth;
   mYpos = 0;
 
   mRobotoTTF = TTF_OpenFont("res/Roboto-Regular.ttf", 24);

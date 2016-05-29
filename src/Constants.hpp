@@ -1,8 +1,13 @@
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
-const int SCREEN_WIDTH  = 400;
-const int SCREEN_HEIGHT = 600;
+const int GAME_WIDTH  = 400;
+const int GAME_HEIGHT = 600;
+const int DEBUG_PANE_WIDTH  = 400;
+const int DEBUG_PANE_HEIGHT = GAME_HEIGHT;
+const int SCREEN_WIDTH  = GAME_WIDTH + DEBUG_PANE_WIDTH;
+const int SCREEN_HEIGHT = GAME_HEIGHT;
+
 const double GRAVITY = 0.5;
 
 const int CHAR_HEIGHT = 30;

@@ -31,11 +31,11 @@ GameEngine::GameEngine(){
   mHeightJumped = 0;
   mScoreText = new ScoreText;
 
-  mPlatforms.push_back(Platform(SCREEN_WIDTH/2, -100, SCREEN_WIDTH));
+  mPlatforms.push_back(Platform(GAME_WIDTH/2, -100, GAME_WIDTH));
   int tempyval = -100;
   while(tempyval<JUMPING_THRESHOLD_HEIGHT){
     tempyval += rand()%(MAX_PLATFORM_Y_SPACING - MIN_PLATFORM_Y_SPACING) + MIN_PLATFORM_Y_SPACING;
-    mPlatforms.push_back(Platform(rand()%SCREEN_WIDTH, tempyval, PLATFORM_WIDTH));
+    mPlatforms.push_back(Platform(rand()%GAME_WIDTH, tempyval, PLATFORM_WIDTH));
   }
 }
 
@@ -84,9 +84,9 @@ void GameEngine::update(void){
   }
 
   if(myChar.getXpos()<0){
-    myChar.setXpos(SCREEN_WIDTH);
+    myChar.setXpos(GAME_WIDTH);
   }
-  if(myChar.getXpos()>SCREEN_WIDTH){
+  if(myChar.getXpos()>GAME_WIDTH){
     myChar.setXpos(0);
   }
 
@@ -94,7 +94,7 @@ void GameEngine::update(void){
     mHeightJumped = myChar.getYpos();
   }
 
-  if (myChar.getTransformedYpos(mHeightJumped) > SCREEN_HEIGHT){
+  if (myChar.getTransformedYpos(mHeightJumped) > GAME_HEIGHT){
     std::cout << "GAME_OVER" << std::endl;
     myChar.setPos(myChar.getXpos(), 100);
   }
@@ -104,11 +104,11 @@ void GameEngine::managePlatforms(void){
   std::cout << "Number of platforms: " << mPlatforms.size() << std::endl;
   // back undefined if vector empty. Shouldn't ever be empty but just incase...
   if(mPlatforms.size() == 0 || mPlatforms.back().getTransformedYpos(mHeightJumped)>=0){
-    int newXpos = rand()%SCREEN_WIDTH;
+    int newXpos = rand()%GAME_WIDTH;
     int newYpos = mHeightJumped + JUMPING_THRESHOLD_HEIGHT + rand()%(MAX_PLATFORM_Y_SPACING - MIN_PLATFORM_Y_SPACING) + MIN_PLATFORM_Y_SPACING;
     mPlatforms.push_back(Platform(newXpos, newYpos, PLATFORM_WIDTH));
   }
-  if(mPlatforms.size() > 0 && mPlatforms.front().getTransformedYpos(mHeightJumped)>SCREEN_HEIGHT){
+  if(mPlatforms.size() > 0 && mPlatforms.front().getTransformedYpos(mHeightJumped)>GAME_HEIGHT){
     mPlatforms.erase(mPlatforms.begin());
   }
 }
