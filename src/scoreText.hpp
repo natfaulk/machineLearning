@@ -1,7 +1,14 @@
 #ifndef SCORE_TEXT_HPP
 #define SCORE_TEXT_HPP
 
-#include <SDL2_ttf/SDL_ttf.h>
+#ifdef __APPLE__
+	#include <SDL2_ttf/SDL_ttf.h>
+#elif __linux__
+	#include <SDL2/SDL_ttf.h>
+#else
+#   error "Unknown compiler"
+#endif
+
 #include "baseClasses.hpp"
 #include "Constants.hpp"
 

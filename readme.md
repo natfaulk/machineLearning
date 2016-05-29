@@ -17,3 +17,13 @@ Currently only tested on OSX
 
 # Progress
 Basic game completed, no machine learning / neural network implemented yet
+
+# Build instructions
+## Linux
+
+* Install the SDL2 library `sudo apt-get install libsdl2-dev` (Debian / Ubuntu derivatives)
+* Install the SDL2 TTF library `sudo apt-get install libsdl2-ttf-dev`
+* Download [Roboto-Regular.ttf](https://github.com/google/fonts/tree/master/apache/roboto) and put in the res folder
+* Make and run the program
+```make
+bin/ml```
