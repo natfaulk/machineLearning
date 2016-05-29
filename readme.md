@@ -25,5 +25,7 @@ Basic game completed, no machine learning / neural network implemented yet
 * Install the SDL2 TTF library `sudo apt-get install libsdl2-ttf-dev`
 * Download [Roboto-Regular.ttf](https://github.com/google/fonts/tree/master/apache/roboto) and put in the res folder
 * Make and run the program
-```make
-bin/ml```
+```
+make
+bin/ml
+```
