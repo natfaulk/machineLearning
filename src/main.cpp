@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include "gameEngine.hpp"
 #include "debugPane.hpp"
+#include "textBox.hpp"
 
 GameEngine game;
 DebugPane debugPane;
@@ -15,9 +16,19 @@ int main(int, char**){
 	bool leftPressed = false;
 	bool rightPressed = false;
 
+	Uint32 previousTime = SDL_GetTicks();
+
+	TextBox fpsText(GAME_WIDTH + 10, 10);
+	fpsText.updateText("Hello World!");
+	fpsText.setColour({0xFF,0xFF,0xFF});
+
 	while(!quit){
+		fpsText.updateText(std::to_string(1000.0/double(1+(SDL_GetTicks()-previousTime))));
+		std::cout << 1000.0/(1+(SDL_GetTicks()-previousTime)) << std::endl;
+		previousTime = SDL_GetTicks();
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 ) {
+
 			//User requests quit
 			if( e.type == SDL_QUIT ) {
 				quit = true;
@@ -50,6 +61,7 @@ int main(int, char**){
 
 		// see comment by getRenderer() definition
 		debugPane.draw(game.getRenderer());
+		fpsText.draw(game.getRenderer());
 
 		SDL_RenderPresent( game.getRenderer() );
 
