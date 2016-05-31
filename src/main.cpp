@@ -1,5 +1,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <fstream> // file operations
+#include <ctime> // time()
 #include "gameEngine.hpp"
 #include "debugPane.hpp"
 #include "textBox.hpp"
@@ -12,6 +14,7 @@ AI ai;
 const bool AI_CONTROLLED = true;
 
 int main(int, char**){
+	srand(time(0));
 	bool quit = false;
 	SDL_Event e;
 

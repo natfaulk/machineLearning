@@ -1,5 +1,7 @@
 #include "gameEngine.hpp"
 #include <iostream>
+#include <cstdlib> // rand()
+#include <ctime> // time()
 
 GameEngine::GameEngine(){
   if (SDL_Init(SDL_INIT_VIDEO) != 0){
@@ -33,6 +35,8 @@ GameEngine::GameEngine(){
 
   mPlatforms.push_back(Platform(GAME_WIDTH/2, -100, GAME_WIDTH));
   int tempyval = -100;
+  srand(time(0)); // seed the random number generator
+    // else first few platforms always the same
   while(tempyval<JUMPING_THRESHOLD_HEIGHT){
     tempyval += rand()%(MAX_PLATFORM_Y_SPACING - MIN_PLATFORM_Y_SPACING) + MIN_PLATFORM_Y_SPACING;
     mPlatforms.push_back(Platform(rand()%GAME_WIDTH, tempyval, PLATFORM_WIDTH));
