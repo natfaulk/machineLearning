@@ -3,9 +3,13 @@
 #include "gameEngine.hpp"
 #include "debugPane.hpp"
 #include "textBox.hpp"
+#include "AImain.hpp"
 
 GameEngine game;
 DebugPane debugPane;
+AI ai;
+
+const bool AI_CONTROLLED = true;
 
 int main(int, char**){
 	bool quit = false;
@@ -15,6 +19,9 @@ int main(int, char**){
 
 	bool leftPressed = false;
 	bool rightPressed = false;
+
+	ai.addOutput(&leftPressed);
+	ai.addOutput(&rightPressed);
 
 	Uint32 previousTime = SDL_GetTicks();
 
@@ -34,18 +41,26 @@ int main(int, char**){
 				quit = true;
 
 			} else if( e.type == SDL_KEYDOWN ) {
-				if(e.key.keysym.sym == SDLK_LEFT){
-					leftPressed = true;
-				} else if(e.key.keysym.sym == SDLK_RIGHT){
-					rightPressed = true;
+				if(!AI_CONTROLLED){
+					if(e.key.keysym.sym == SDLK_LEFT){
+						leftPressed = true;
+					} else if(e.key.keysym.sym == SDLK_RIGHT){
+						rightPressed = true;
+					}
 				}
 			} else if( e.type == SDL_KEYUP ) {
-				if(e.key.keysym.sym == SDLK_LEFT){
-					leftPressed = false;
-				} else if(e.key.keysym.sym == SDLK_RIGHT){
-					rightPressed = false;
+				if(!AI_CONTROLLED){
+					if(e.key.keysym.sym == SDLK_LEFT){
+						leftPressed = false;
+					} else if(e.key.keysym.sym == SDLK_RIGHT){
+						rightPressed = false;
+					}
 				}
 			}
+		}
+
+		if(AI_CONTROLLED){
+			ai.updateOutputs();
 		}
 
 		if (leftPressed){

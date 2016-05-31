@@ -13,10 +13,10 @@ Download Roboto-Regular.ttf and put in the res folder
 
 Potentially need this for sdl_ttf setup on osx http://www.cs.nyu.edu/courses/fall09/V22.0201-002/SDL_ttf_instructions.html
 
-Currently only tested on OSX
+Currently only tested on OSX and on raspberry PI (runs very slowly on pi - due to software rendering I think)
 
 # Progress
-Basic game completed, no machine learning / neural network implemented yet
+Basic game completed, VERY primitive AI implemented (randomly presses left and right), working on machine learning / neural network implementation
 
 # Build instructions
 ## Linux
