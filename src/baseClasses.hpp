@@ -14,11 +14,11 @@ public:
   void setPos(double xpos, double ypos);
   void move(void);
   void setVelocity(double xvel, double yvel);
-  double getXvelocity(void);
-  double getYvelocity(void);
-  double getXpos(void);
-  double getYpos(void);
-  double getTransformedYpos(int heightJumped);
+  double getXvelocity(void) const;
+  double getYvelocity(void) const;
+  double getXpos(void) const;
+  double getYpos(void) const;
+  double getTransformedYpos(int heightJumped) const;
   void setXpos(double xpos);
   void setYpos(double ypos);
 

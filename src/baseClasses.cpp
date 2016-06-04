@@ -20,19 +20,19 @@ void DrawableObject::setVelocity(double xvel, double yvel){
   mYvel = yvel;
 }
 
-double DrawableObject::getXpos(void){
+double DrawableObject::getXpos(void) const{
   return mXpos;
 }
 
-double DrawableObject::getYpos(void){
+double DrawableObject::getYpos(void) const{
   return mYpos;
 }
 
-double DrawableObject::getXvelocity(void){
+double DrawableObject::getXvelocity(void) const{
   return mXvel;
 }
 
-double DrawableObject::getYvelocity(void){
+double DrawableObject::getYvelocity(void) const{
   return mYvel;
 }
 
@@ -48,6 +48,6 @@ void DrawableObject::setYpos(double ypos){
   mYpos = ypos;
 }
 
-double DrawableObject::getTransformedYpos(int heightJumped){
+double DrawableObject::getTransformedYpos(int heightJumped) const{
   return (heightJumped - mYpos) + JUMPING_THRESHOLD_HEIGHT;
 }
