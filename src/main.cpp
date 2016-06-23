@@ -90,6 +90,14 @@ int main(int, char**){
 		}
 	}
 
+	std::ofstream myfile;
+	myfile.open("scores.txt", std::ios::app);
+	if(myfile.is_open()){
+		myfile << game.getHeightJumped() << std::endl;
+  	myfile.close();
+	}else{
+		std::cout<<"Unable to open file"<<std::endl;
+	}
 
 	game.cleanup();
 	return 0;
