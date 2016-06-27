@@ -6,9 +6,11 @@ AI::AI(){
   for(int i = 0; i<6;i++){ // char, platform above and below, x and y coords
     mInputNeurons.push_back(InputNeuron());
   }
-  std::cout << "Length of input Neurons :"<< mInputNeurons.size() << std::endl;
-
-
+  // std::cout << "Length of input Neurons :"<< mInputNeurons.size() << std::endl;
+  HiddenNeuron tempHiddenNeuron;
+  tempHiddenNeuron.addInput(&mInputNeurons.at(0), 1);
+  tempHiddenNeuron.addInput(&mInputNeurons.at(4), -1);
+  mHiddenNeurons.push_back(tempHiddenNeuron);
 }
 
 void AI::addOutput(bool *output){
@@ -58,10 +60,22 @@ void AI::updateOutputs(const std::vector<Platform>& platforms, const Character& 
     mInputNeurons.at(2).updateInput(tempPlatX);
     mInputNeurons.at(3).updateInput(tempPlatY);
   }
-  
+
   // still doing random numbers
   // TODO make it use the neurons!!!
-  for (int i = 0; i < mOutputs.size(); i++){
-    (* mOutputs.at(i)) = bool(rand()%2);
+  // for (int i = 0; i < mOutputs.size(); i++){
+  //   (* mOutputs.at(i)) = bool(rand()%2);
+  // }
+
+  // if platform abovetot the left move left else move right
+  if(mHiddenNeurons.at(0).resolveOutput()>0){
+    (* mOutputs.at(0)) = true;
+    (* mOutputs.at(1)) = false;
+  }else if(mHiddenNeurons.at(0).resolveOutput()<0){
+    (* mOutputs.at(0)) = false;
+    (* mOutputs.at(1)) = true;
+  }else{
+    (* mOutputs.at(0)) = false;
+    (* mOutputs.at(1)) = false;
   }
 }
