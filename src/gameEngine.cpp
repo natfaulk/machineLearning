@@ -125,3 +125,11 @@ bool GameEngine::gameOver(void){
 int GameEngine::getHeightJumped(void){
   return mHeightJumped;
 }
+
+const std::vector<Platform>& GameEngine::getPlatforms(void){
+  return mPlatforms;
+}
+
+const Character& GameEngine::getCharacter(void){
+  return myChar;
+}

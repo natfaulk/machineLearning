@@ -3,6 +3,8 @@
 
 #include <vector>
 
+// TODO Potentially add dedicated output neurons, memory neurons.
+
 class BaseNeuron{
 public:
   virtual double resolveOutput(void) = 0;
@@ -11,7 +13,11 @@ private:
 };
 
 class InputNeuron: public BaseNeuron{
+public:
   double resolveOutput(void);
+  void updateInput(double inputValue);
+private:
+  double mInputValue;
 };
 
 // class OutputNeuron: public BaseNeuron{

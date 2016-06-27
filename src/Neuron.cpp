@@ -19,5 +19,9 @@ void HiddenNeuron::addInput(BaseNeuron *neuron, double weight){
 }
 
 double InputNeuron::resolveOutput(void){
-  return 1;
+  return mInputValue;
+}
+
+void InputNeuron::updateInput(double inputValue){
+  mInputValue = inputValue;
 }

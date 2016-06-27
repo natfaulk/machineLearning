@@ -63,7 +63,8 @@ int main(int, char**){
 		}
 
 		if(AI_CONTROLLED){
-			ai.updateOutputs();
+			// pass position information from game engine to AI
+			ai.updateOutputs(game.getPlatforms(), game.getCharacter());
 		}
 
 		if (leftPressed){

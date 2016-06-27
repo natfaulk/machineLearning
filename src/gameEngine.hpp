@@ -22,6 +22,8 @@ public:
   // The window stuff should be moved out of game engine into another class
   // then this function can be removed. Currently here so debug can access the renderer
   SDL_Renderer* getRenderer();
+  const std::vector<Platform>& getPlatforms(void);
+  const Character& getCharacter(void);
 
   Character myChar;
   ScoreText* mScoreText;
