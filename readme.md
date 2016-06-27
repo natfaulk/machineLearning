@@ -16,8 +16,7 @@ Potentially need this for sdl_ttf setup on osx http://www.cs.nyu.edu/courses/fal
 Currently only tested on OSX and on raspberry PI (runs very slowly on pi - due to software rendering I think)
 
 # Progress
-Basic game completed, VERY primitive AI implemented (randomly presses left and right), working on machine learning / neural network implementation
-
+Basic game completed, neural network classes mostly completed, working on machine learning / algorithm to build the Neural Network.
 # Build instructions
 ## Linux
 
