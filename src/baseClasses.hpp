@@ -1,7 +1,7 @@
 #ifndef BASE_CLASSES_HPP
 #define BASE_CLASSES_HPP
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "Constants.hpp"
 
 class DrawableObject{

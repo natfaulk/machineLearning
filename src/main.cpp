@@ -1,5 +1,5 @@
 #include <iostream>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <fstream> // file operations
 #include <ctime> // time()
 #include "gameEngine.hpp"

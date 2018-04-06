@@ -5,3 +5,6 @@ bin/ml
 res/Roboto-Regular.ttf
 
 scores.txt
+*.dll
+*.txt
+*.exe
