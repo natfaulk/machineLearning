@@ -9,12 +9,11 @@
 
 GameEngine game;
 DebugPane debugPane;
-AI ai;
 
 const bool AI_CONTROLLED = true;
 
 int main(int, char**){
-	srand(time(0));
+	// srand(time(0));
 	bool quit = false;
 	SDL_Event e;
 
@@ -23,8 +22,47 @@ int main(int, char**){
 	bool leftPressed = false;
 	bool rightPressed = false;
 
-	ai.addOutput(&leftPressed);
-	ai.addOutput(&rightPressed);
+	AI_Init();
+
+	NronId leftID = AI_addOutput(&leftPressed);
+	NronId rightID = AI_addOutput(&rightPressed);
+
+	std::vector<NronId> tempInputs;
+	std::vector<int> tempWeights;
+
+	NronId tempId;
+	tempId.type = NEURON_INPUT;
+
+	tempId.id = 0;
+	tempInputs.push_back(tempId);
+	tempWeights.push_back(1);
+
+	tempId.id = 4;
+	tempInputs.push_back(tempId);
+	tempWeights.push_back(-1);
+
+	AI_addHiddenNeuron(leftID, tempInputs, tempWeights);
+
+	tempInputs.clear();
+	tempWeights.clear();
+
+	tempId.id = 0;
+	tempInputs.push_back(tempId);
+	tempWeights.push_back(-1);
+
+	tempId.id = 4;
+	tempInputs.push_back(tempId);
+	tempWeights.push_back(1);
+	
+	AI_addHiddenNeuron(rightID, tempInputs, tempWeights);
+
+	// ai.addOutputHiddenNeuron(leftID, 0, 1, 4, -1);
+	// ai.addOutputHiddenNeuron(rightID, 0, -1, 4, 1);
+	// ai.addOutputHiddenNeuron(leftID, 0, 1, 2, -1);
+	// ai.addOutputHiddenNeuron(rightID, 0, -1, 2, 1);
+	
+
+	AI_printNeurons();
 
 	Uint32 previousTime = SDL_GetTicks();
 
@@ -34,7 +72,7 @@ int main(int, char**){
 
 	while(!quit){
 		fpsText.updateText(std::to_string(1000.0/double(1+(SDL_GetTicks()-previousTime))));
-		std::cout << 1000.0/(1+(SDL_GetTicks()-previousTime)) << std::endl;
+		// std::cout << 1000.0/(1+(SDL_GetTicks()-previousTime)) << std::endl;
 		previousTime = SDL_GetTicks();
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 ) {
@@ -64,7 +102,7 @@ int main(int, char**){
 
 		if(AI_CONTROLLED){
 			// pass position information from game engine to AI
-			ai.updateOutputs(game.getPlatforms(), game.getCharacter());
+			AI_updateOutputs(game.getPlatforms(), game.getCharacter());
 		}
 
 		if (leftPressed){
