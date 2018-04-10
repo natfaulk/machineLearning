@@ -14,10 +14,14 @@ public:
   AI();
   // inputs ie game outputs
   // outputs ie inputs
-  // set outputs
-  void addOutput(bool *output);
+  // set outputs, returns id of output
+  int addOutput(bool *output);
   // curently random number generation
   void updateOutputs(const std::vector<Platform>& platforms, const Character& character);
+
+  void addOutputHiddenNeuron(int outputID, int inputID1, double weight1, int inputID2, double weight2);
+
+  void printNeurons(void);
 private:
   // pass the AI pointers to bools which can then be checked by the game
   // seems a very C way of doing it (as opposed to a C++ way) however the ideal
@@ -26,8 +30,8 @@ private:
 
   // Neurons
   std::vector<InputNeuron> mInputNeurons;
-  std::vector<HiddenNeuron> mOutputNeurons;
   std::vector<HiddenNeuron> mHiddenNeurons;
+  std::vector<OutputNeuron> mOutputNeurons;
 };
 
 #endif

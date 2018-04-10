@@ -35,6 +35,7 @@ GameEngine::GameEngine(){
 
   mPlatforms.push_back(Platform(GAME_WIDTH/2, -100, GAME_WIDTH));
   int tempyval = -100;
+  // srand(10); // seed the random number generator
   srand(time(0)); // seed the random number generator
     // else first few platforms always the same
   while(tempyval<JUMPING_THRESHOLD_HEIGHT){

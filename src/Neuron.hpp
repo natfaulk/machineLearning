@@ -7,7 +7,9 @@
 
 class BaseNeuron{
 public:
+  BaseNeuron();
   virtual double resolveOutput(void) = 0;
+  int mID;
 private:
 
 };
@@ -20,17 +22,20 @@ private:
   double mInputValue;
 };
 
-// class OutputNeuron: public BaseNeuron{
-//
-// };
-
 class HiddenNeuron: public BaseNeuron{
 public:
   double resolveOutput(void);
   void addInput(BaseNeuron *neuron, double weight);
-private:
   std::vector<BaseNeuron *> mInputs;
   std::vector<double> mWeights; // between -1 and 1?
+  double mThreshold;
+private:
 };
 
+class OutputNeuron: public HiddenNeuron{
+public:
+  OutputNeuron(bool* _output);
+  void updateOutputs(void);
+  bool* mOuput;
+};
 #endif

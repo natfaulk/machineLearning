@@ -7,14 +7,70 @@ AI::AI(){
     mInputNeurons.push_back(InputNeuron());
   }
   // std::cout << "Length of input Neurons :"<< mInputNeurons.size() << std::endl;
-  HiddenNeuron tempHiddenNeuron;
-  tempHiddenNeuron.addInput(&mInputNeurons.at(0), 1);
-  tempHiddenNeuron.addInput(&mInputNeurons.at(4), -1);
-  mHiddenNeurons.push_back(tempHiddenNeuron);
+  // HiddenNeuron tempHiddenNeuron;
+  // tempHiddenNeuron.addInput(&mInputNeurons.at(0), 1);
+  // tempHiddenNeuron.addInput(&mInputNeurons.at(4), -1);
+  // tempHiddenNeuron.mThreshold = 0;
+  // mHiddenNeurons.push_back(tempHiddenNeuron);
+  
+
+  // IMPORTANT
+  // TODO
+  // VERY HACKY FIX
+  // Because neirons point to item in vector, if vector resized when new items
+  // added everything goes wrong and now pointing at garbage memory
+  // get a seg fault
+  // need a fundamental rewrite of neuron system
+  mHiddenNeurons.reserve(20);
+  mOutputNeurons.reserve(20);
 }
 
-void AI::addOutput(bool *output){
-  mOutputs.push_back(output);
+void AI::printNeurons(void){
+  std::cout << "Input neurons: ";
+  for (int i = 0; i < mInputNeurons.size(); i++){
+    std::cout << mInputNeurons.at(i).mID << " ";
+  }
+  std::cout << std::endl;
+
+  std::cout << "Hidden neurons: \r\n";
+  for (int i = 0; i < mHiddenNeurons.size(); i++){
+    std::cout << mHiddenNeurons.at(i).mID << ":" << std::endl;
+    for (int j = 0; j < mHiddenNeurons.at(i).mInputs.size(); j++){
+      std::cout << mHiddenNeurons.at(i).mInputs.at(j)->mID << " ";
+    }
+    std::cout << std::endl;    
+  }
+  std::cout << std::endl;
+
+  std::cout << "Output neurons: \r\n";
+  for (int i = 0; i < mOutputNeurons.size(); i++){
+    std::cout << mOutputNeurons.at(i).mID << ":" << std::endl;
+    for (int j = 0; j < mOutputNeurons.at(i).mInputs.size(); j++){
+      std::cout << mOutputNeurons.at(i).mInputs.at(j)->mID << " ";
+    }
+    std::cout << std::endl;    
+  }
+  std::cout << std::endl;
+}
+
+int AI::addOutput(bool *output){
+  // mOutputs.push_back(output);
+  mOutputNeurons.push_back(OutputNeuron(output));
+  mOutputNeurons.back().mThreshold = 0;
+  return mOutputNeurons.back().mID;
+}
+
+void AI::addOutputHiddenNeuron(int outputID, int inputID1, double weight1, int inputID2, double weight2){
+  for (int i = 0; i < mOutputNeurons.size(); i++){
+    if(mOutputNeurons.at(i).mID == outputID){
+      HiddenNeuron tempHiddenNeuron;
+      tempHiddenNeuron.addInput(&mInputNeurons.at(inputID1), weight1);
+      tempHiddenNeuron.addInput(&mInputNeurons.at(inputID2), weight2);
+      tempHiddenNeuron.mThreshold = 0;
+      mHiddenNeurons.push_back(tempHiddenNeuron);
+      mOutputNeurons.at(i).addInput(&(mHiddenNeurons.at(mHiddenNeurons.size() - 1)), 1);
+    }
+  }
 }
 
 // void AI::updateOutputs(void){
@@ -67,15 +123,22 @@ void AI::updateOutputs(const std::vector<Platform>& platforms, const Character& 
   //   (* mOutputs.at(i)) = bool(rand()%2);
   // }
 
-  // if platform abovetot the left move left else move right
-  if(mHiddenNeurons.at(0).resolveOutput()>0){
-    (* mOutputs.at(0)) = true;
-    (* mOutputs.at(1)) = false;
-  }else if(mHiddenNeurons.at(0).resolveOutput()<0){
-    (* mOutputs.at(0)) = false;
-    (* mOutputs.at(1)) = true;
-  }else{
-    (* mOutputs.at(0)) = false;
-    (* mOutputs.at(1)) = false;
+  
+  for (int i = 0; i < mOutputNeurons.size(); i++){
+    mOutputNeurons.at(i).updateOutputs();
   }
+
+  // if platform abovetot the left move left else move right
+  // if(mHiddenNeurons.at(0).resolveOutput()>mHiddenNeurons.at(0).mThreshold){
+  //   (* mOutputNeurons[0].mOuput) = true;
+  //   (* mOutputNeurons[1].mOuput) = false;
+  // }else if(mHiddenNeurons.at(0).resolveOutput()<mHiddenNeurons.at(0).mThreshold){
+  //   (* mOutputNeurons[0].mOuput) = false;
+  //   (* mOutputNeurons[1].mOuput) = true;
+  // }else{
+  //   (* mOutputNeurons[0].mOuput) = false;
+  //   (* mOutputNeurons[1].mOuput) = false;
+  // }
+
+  // if ()
 }

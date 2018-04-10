@@ -14,7 +14,7 @@ AI ai;
 const bool AI_CONTROLLED = true;
 
 int main(int, char**){
-	srand(time(0));
+	// srand(time(0));
 	bool quit = false;
 	SDL_Event e;
 
@@ -23,8 +23,15 @@ int main(int, char**){
 	bool leftPressed = false;
 	bool rightPressed = false;
 
-	ai.addOutput(&leftPressed);
-	ai.addOutput(&rightPressed);
+	int leftID = ai.addOutput(&leftPressed);
+	int rightID = ai.addOutput(&rightPressed);
+	ai.addOutputHiddenNeuron(leftID, 0, 1, 4, -1);
+	ai.addOutputHiddenNeuron(rightID, 0, -1, 4, 1);
+	ai.addOutputHiddenNeuron(leftID, 0, 1, 2, -1);
+	ai.addOutputHiddenNeuron(rightID, 0, -1, 2, 1);
+	
+
+	ai.printNeurons();
 
 	Uint32 previousTime = SDL_GetTicks();
 
@@ -34,7 +41,7 @@ int main(int, char**){
 
 	while(!quit){
 		fpsText.updateText(std::to_string(1000.0/double(1+(SDL_GetTicks()-previousTime))));
-		std::cout << 1000.0/(1+(SDL_GetTicks()-previousTime)) << std::endl;
+		// std::cout << 1000.0/(1+(SDL_GetTicks()-previousTime)) << std::endl;
 		previousTime = SDL_GetTicks();
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 ) {

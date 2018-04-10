@@ -1,5 +1,11 @@
 #include "Neuron.hpp"
 
+static int neuronId = 0;
+
+BaseNeuron::BaseNeuron(){
+  mID = neuronId++;
+}
+
 // TODO cache this as there may be multiple recursive calls to it per tick
 double HiddenNeuron::resolveOutput(void){
   double tempOutput = 0;
@@ -24,4 +30,16 @@ double InputNeuron::resolveOutput(void){
 
 void InputNeuron::updateInput(double inputValue){
   mInputValue = inputValue;
+}
+
+OutputNeuron::OutputNeuron(bool* _output){
+  mOuput = _output;
+}
+
+void OutputNeuron::updateOutputs(void){
+  if (resolveOutput() > mThreshold){
+    (* mOuput) = true;
+  } else {
+    (* mOuput) = false;
+  }
 }
