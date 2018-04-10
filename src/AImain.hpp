@@ -9,29 +9,20 @@
 #include "character.hpp"
 #include "platform.hpp"
 
-class AI{
-public:
-  AI();
-  // inputs ie game outputs
-  // outputs ie inputs
-  // set outputs, returns id of output
-  int addOutput(bool *output);
-  // curently random number generation
-  void updateOutputs(const std::vector<Platform>& platforms, const Character& character);
 
-  void addOutputHiddenNeuron(int outputID, int inputID1, double weight1, int inputID2, double weight2);
+void AI_Init(void);
+// inputs ie game outputs
+// outputs ie inputs
+// set outputs, returns id of output
+NronId AI_addOutput(bool *output);
+// curently random number generation
+void AI_updateOutputs(const std::vector<Platform>& platforms, const Character& character);
 
-  void printNeurons(void);
-private:
-  // pass the AI pointers to bools which can then be checked by the game
-  // seems a very C way of doing it (as opposed to a C++ way) however the ideal
-  // would be to use references but one cannot have a vector of references
-  std::vector<bool *> mOutputs;
+void AI_addHiddenNeuron(NronId outputID, std::vector<NronId> &_inputs, std::vector<int> &_weights);  
 
-  // Neurons
-  std::vector<InputNeuron> mInputNeurons;
-  std::vector<HiddenNeuron> mHiddenNeurons;
-  std::vector<OutputNeuron> mOutputNeurons;
-};
+void AI_printNeurons(void);
+
+BaseNeuron* AI_getNeuronById(NronId _id);
+
 
 #endif

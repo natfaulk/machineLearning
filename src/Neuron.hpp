@@ -5,17 +5,25 @@
 
 // TODO Potentially add dedicated output neurons, memory neurons.
 
+enum NeuronType {NEURON_BASE, NEURON_INPUT, NEURON_HIDDEN, NEURON_OUTPUT};
+
+struct NronId{
+  int id;
+  NeuronType type;
+};
+
 class BaseNeuron{
 public:
   BaseNeuron();
   virtual double resolveOutput(void) = 0;
-  int mID;
+  NronId mID;
 private:
 
 };
 
 class InputNeuron: public BaseNeuron{
 public:
+  InputNeuron();
   double resolveOutput(void);
   void updateInput(double inputValue);
 private:
@@ -24,9 +32,10 @@ private:
 
 class HiddenNeuron: public BaseNeuron{
 public:
+  HiddenNeuron();
   double resolveOutput(void);
-  void addInput(BaseNeuron *neuron, double weight);
-  std::vector<BaseNeuron *> mInputs;
+  void addInput(NronId neuron, double weight);
+  std::vector<NronId> mInputs;
   std::vector<double> mWeights; // between -1 and 1?
   double mThreshold;
 private:
