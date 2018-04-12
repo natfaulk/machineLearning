@@ -28,3 +28,12 @@ Basic game completed, neural network classes mostly completed, working on machin
 make
 bin/ml
 ```
+
+## Windows
+
+* Download the prebuilt SDL2 library
+* Download the prebuilt SDL2 TTF library
+* compile with `make`
+* Download [Roboto-Regular.ttf](https://github.com/google/fonts/tree/master/apache/roboto) and put in the res folder
+* copy the .dll files from bin folders of the SDL and TTF libraries to the bin folder where the ml.exe file is
+* run with `.\bin\ml.exe`
