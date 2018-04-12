@@ -4,7 +4,7 @@
 #ifdef __APPLE__
 	#include <SDL2_ttf/SDL_ttf.h>
 #elif __linux__ || defined(_WIN32) || defined(WIN32)
-	#include <SDL_ttf.h>
+	#include <SDL2/SDL_ttf.h>
 #else
 #   error "Unknown compiler"
 #endif

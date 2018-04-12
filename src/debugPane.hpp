@@ -1,7 +1,7 @@
 #ifndef DEBUG_PANE_HPP
 #define DEBUG_PANE_HPP
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "Constants.hpp"
 
 class DebugPane{

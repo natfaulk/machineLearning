@@ -1,7 +1,7 @@
 #ifndef GAME_ENGINE_HPP
 #define GAME_ENGINE_HPP
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "baseClasses.hpp"
 #include "character.hpp"
 #include "platform.hpp"

@@ -1,7 +1,7 @@
 ifeq ($(OS),Windows_NT)
 	CXX = g++
 	SDL = -LC:\SDL2\lib -LC:\SDL2_ttf\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf
-	CXXFLAGS = -Wall -std=c++11 -IC:\SDL2_ttf\include\SDL2 -IC:\SDL2\include\SDL2
+	CXXFLAGS = -Wall -std=c++11 -IC:\SDL2_ttf\include -IC:\SDL2\include -IC:\SDL2\include\SDL2
 else
 	UNAME := $(shell uname)
 endif
